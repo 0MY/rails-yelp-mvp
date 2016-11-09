@@ -11,6 +11,8 @@ NB_RESTO = 20
 NB_REV = 5
 MAX_RATING = 5
 
+Faker::Config.locale = "fr"
+
 Restaurant.destroy_all
 NB_RESTO.times do |resto_id|
 
@@ -19,8 +21,8 @@ NB_RESTO.times do |resto_id|
   resto = Restaurant.create!( name: Faker::Company.name,
                                                address: resto_address,
                                                phone_number: Faker::PhoneNumber.phone_number,
-                                               category: ["chinese", "japanese", "belgian", "italian", "french"].sample
-                                                 )
+                                               category: Restaurant::CATEGORIES.sample
+                                               )
   # byebug
   rand(0..NB_REV).times do |j|
     rev = resto.reviews.create!( content: Faker::Lorem.paragraph(1, true, 2),
